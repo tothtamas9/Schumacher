@@ -28,7 +28,14 @@
 
             //5.feladat:
             Console.WriteLine("5. feladat: Hibastatisztika");
-
+            var hibaCsoportok = eredmenyek.Where(x => x.Status != "Finished" && x.Status != "+1 Lap").GroupBy(x => x.Status);
+            foreach (var csoport in hibaCsoportok)
+            {
+                if (csoport.Count() > 2)
+                {
+                    Console.WriteLine($"\t{csoport.Key}: {csoport.Count()}");
+                }
+            }
         }
     }
 }
